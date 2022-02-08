@@ -4,11 +4,13 @@ for (let i = 0; i < numOfButtons; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function () {
     let keyPressed = this.innerHTML;
     makeSound(keyPressed);
+    addAnimations(keyPressed);
   });
 }
 
 document.addEventListener("keydown", function (event) {
   makeSound(event.key);
+  addAnimations(event.key);
 });
 
 function makeSound(key) {
@@ -45,3 +47,27 @@ function makeSound(key) {
       let snare1 = new Audio("./sounds/snare.mp3").play();
   }
 }
+
+function addAnimations(currentKey) {
+  let activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
+}
+// //callback functions
+// function anotherAddEventListener(typeOfEvent, callBack) {
+//   // detect the code
+//   let eventThatHappened = {
+//     eventType: "keypress",
+//     key: "p",
+//     durationOfKeyPressed: 2,
+//   };
+//   if (eventThatHappened.eventType === typeOfEvent) {
+//     callBack(eventThatHappened);
+//   }
+// }
+//
+// anotherAddEventListener("keypress", function (e) {
+//   console.log(e);
+// });
